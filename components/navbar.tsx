@@ -7,8 +7,8 @@ import { motion } from "framer-motion"
 import { Moon, Sun, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
-// Import the LanguageToggle component
 import { LanguageToggle } from "@/components/language-toggle"
+import { SocialLinks } from "@/components/social-links"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -56,7 +56,7 @@ export function Navbar() {
           </div>
 
           {/* Desktop menu */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center">
             <div className="ml-10 flex items-center space-x-4">
               {navItems.map((item) => (
                 <Link key={item.name} href={item.path} className="relative group">
@@ -78,6 +78,10 @@ export function Navbar() {
                   )}
                 </Link>
               ))}
+            </div>
+
+            <div className="ml-6 flex items-center space-x-2">
+              <SocialLinks />
               <LanguageToggle />
               <Button
                 variant="ghost"
@@ -143,6 +147,9 @@ export function Navbar() {
               {item.name}
             </Link>
           ))}
+          <div className="px-3 py-2 flex justify-center">
+            <SocialLinks />
+          </div>
         </div>
       </motion.div>
     </nav>

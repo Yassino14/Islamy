@@ -10,8 +10,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
-import { Mail, MessageSquare, Send, Phone, MapPin, CheckCircle } from "lucide-react"
-
+import { Mail, Send, CheckCircle, Globe, Linkedin, Github } from "lucide-react"
+import SocialLinks from "@/components/social-links"
 export default function ContactPage() {
   const { toast } = useToast()
   const [formState, setFormState] = useState({
@@ -47,17 +47,26 @@ export default function ContactPage() {
     {
       icon: <Mail className="h-5 w-5 text-emerald-600" />,
       title: "Email",
-      details: "support@islamy.example.com",
+      details: "louati.yessine1@gmail.com",
+      link: "mailto:louati.yessine1@gmail.com",
     },
     {
-      icon: <Phone className="h-5 w-5 text-emerald-600" />,
-      title: "Phone",
-      details: "+1 (555) 123-4567",
+      icon: <Globe className="h-5 w-5 text-emerald-600" />,
+      title: "Website",
+      details: "yassinolouati.me",
+      link: "https://yassinolouati.me",
     },
     {
-      icon: <MapPin className="h-5 w-5 text-emerald-600" />,
-      title: "Address",
-      details: "123 Islamic Center St, Knowledge City, 12345",
+      icon: <Linkedin className="h-5 w-5 text-emerald-600" />,
+      title: "LinkedIn",
+      details: "Yassine Louati",
+      link: "https://www.linkedin.com/in/yassine-louati-9629a219a/",
+    },
+    {
+      icon: <Github className="h-5 w-5 text-emerald-600" />,
+      title: "GitHub",
+      details: "yassinelouati",
+      link: "https://github.com/yassinelouati", // Note: Using a placeholder as the provided URL was the same as LinkedIn
     },
   ]
 
@@ -72,57 +81,39 @@ export default function ContactPage() {
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
               Have questions or feedback? We'd love to hear from you.
             </p>
+            <div className="flex justify-center mb-8">
+              <SocialLinks />
+            </div>
           </motion.div>
         </div>
       </section>
 
       <section className="w-full max-w-5xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {contactInfo.map((info, index) => (
-            <motion.div
+            <motion.a
               key={index}
+              href={info.link}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 text-center"
+              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 text-center group"
             >
-              <div className="flex justify-center mb-4 bg-emerald-100 dark:bg-emerald-900/30 p-3 rounded-full">
+              <div className="flex justify-center mb-4 bg-emerald-100 dark:bg-emerald-900/30 p-3 rounded-full group-hover:bg-emerald-200 dark:group-hover:bg-emerald-800/40 transition-colors">
                 {info.icon}
               </div>
               <h3 className="text-lg font-semibold mb-2 text-emerald-700 dark:text-emerald-400">{info.title}</h3>
-              <p className="text-gray-600 dark:text-gray-300">{info.details}</p>
-            </motion.div>
+              <p className="text-gray-600 dark:text-gray-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
+                {info.details}
+              </p>
+            </motion.a>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md"
-          >
-            <h2 className="text-2xl font-bold mb-4 text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
-              <MessageSquare className="h-6 w-6" /> Get in Touch
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              We're here to help with any questions about Islamic knowledge or feedback about our service. Fill out the
-              form, and we'll get back to you as soon as possible.
-            </p>
-            <div className="space-y-4">
-              {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  {info.icon}
-                  <div>
-                    <p className="font-medium text-emerald-700 dark:text-emerald-400">{info.title}</p>
-                    <p className="text-gray-600 dark:text-gray-300">{info.details}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
+        <div className="max-w-2xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <Card className="shadow-lg">
               <CardHeader>
                 <CardTitle>Send us a Message</CardTitle>
